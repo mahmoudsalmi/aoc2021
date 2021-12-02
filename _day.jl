@@ -4,28 +4,18 @@
 
 using DelimitedFiles
 
-exemple = readdlm("day1.exemple");
-input = readdlm("day1.input");
+exemple = readdlm("_day.exemple");
+input = readdlm("_day.input");
 
 function solution(d)
-    res = 0
-    for i in 2:length(d)
-        if (d[i][1] > d[i - 1][1])
-            res = res + 1
-        end
-    end
-    return res
+    return "No result"
 end
 
 function solution2(d)
-    byThreeData = zeros(length(d) - 2)
-    for j in 1:length(byThreeData)
-        byThreeData[j] = d[j] + d[j+1] + d[j+2]
-    end
-    return solution(byThreeData)
+    return "No result"
 end
 
-println("----(AOC2021 - Day1)-------------------------[Julia]----")
+println("----(AOC2021 - Day 00)-----------------------[Julia]----")
 println("Exemple :: Part 1 ====>     ", solution(exemple))
 println("Exemple :: Part 2 ====>     ", solution2(exemple))
 println("--------------------------------------------------------")
