@@ -3,7 +3,7 @@ const {createReadStream} = require('fs');
 const {once} = require('events');
 
 function parseLine(line) {
-  return parseInt(line);
+  return [...line].map(d => parseInt(d));
 }
 
 async function parseFile(filename) {
@@ -21,7 +21,19 @@ async function parseFile(filename) {
 }
 
 function solution(data) {
-  return `Dummy part1: ${data.length}`;
+  const len = data.length;
+  const width = data[0].length;
+
+  let res = data.reduce(
+    (d, sum) => sum.map((r, i) => r + d[i]), 
+    Array(width).fill(0)
+  );
+  
+  res = [ res.map(r => r * 2 >= len ? 1 : 0), res.map(r => r * 2 < len ? 1 : 0) ]
+    .map( bits => bits.reduce((b, s) => b + s, ''))
+    .map(s => parseInt(s, 2));
+
+  return [...res, res.reduce((n, m) => n * m, 1)];
 }
 
 function solution2(data) {
@@ -29,13 +41,15 @@ function solution2(data) {
 }
 
 (async function() {
-  const exemple = await parseFile('_day.exemple');
-  const input = await parseFile('_day.input');
 
-  console.log("----(AOC2021 - Day01)---------------------------[Js]----")
+  console.log("----(AOC2021 - Day 03)--------------------------[Js]----")
+  
+  const exemple = await parseFile('day3.exemple');
   console.log("Exemple :: Part 1 ====>     ", solution(exemple))
   console.log("Exemple :: Part 2 ====>     ", solution2(exemple))
   console.log("--------------------------------------------------------")
+  
+  const input = await parseFile('day3.input');
   console.log("Input   :: Part 1 ====>     ", solution(input))
   console.log("Input   :: Part 2 ====>     ", solution2(input))
   console.log("--------------------------------------------------------")
