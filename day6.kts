@@ -1,7 +1,5 @@
 import java.io.File
 
-println("Hello world!")
-
 fun initDay() : HashMap<Int, Long> {
     val res: HashMap<Int, Long> = HashMap()
     for (i in 0 until 9) {
